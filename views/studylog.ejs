@@ -37,14 +37,17 @@
     <% } %>
 
     <h2>Welcome, <%= user.username %>!</h2>
-    <a href="/studylog/add" class="btn btn-success my-3">+ Add New Log</a>
-
+    <div class="d-flex gap-2 my-3">
+      <a href="/studylog/add" class="btn btn-success">+ Add New Log</a>
+      <a href="/studylog/timer" class="btn btn-info">⏱️ Use Timer</a>
+    </div>
     
-    <form action="/studylog" method="GET" class="mb-3">
-      <div class="input-group">
-        <input type="text" name="keyword" class="form-control" placeholder="Search by topic..." value="<%= keyword %>" required>
-        <button type="submit" class="btn btn-primary">Search</button>
-      </div>
+    <form method="GET" action="/studylog" class="d-flex mb-3">
+      <input type="text" name="keyword" class="form-control me-2" placeholder="Search by topic..." value="<%= keyword %>">
+      <button type="submit" class="btn btn-primary me-2">Search</button>
+      <% if (keyword) { %>
+        <a href="/studylog" class="btn btn-secondary">Clear Filter</a>
+      <% } %>
     </form>
 
     <% if (logs.length === 0) { %>

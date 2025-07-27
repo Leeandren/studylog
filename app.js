@@ -118,7 +118,7 @@ app.get('/studylog', checkAuthenticated, (req, res) => {
     const userId = req.session.user.id;
     const keyword = req.query.keyword;
 
-// =====MERGED: Search/filter functionality =========
+// ===== MERGED: Search/filter functionality =========
     let sql = 'SELECT * FROM study_logs WHERE user_id = ?';
     const params = [userId];
 
@@ -220,6 +220,22 @@ app.get('/admin/studylogs', checkAuthenticated, checkAdmin, (req, res) => {
         if (err) throw err;
         res.render('adminStudylogs', { logs: results, user: req.session.user });
     });
+});
+
+// ========================= TIMER=========================
+app.get('/studylog/timer', checkAuthenticated, (req, res) => {
+  res.render('studyTimer', { user: req.session.user });
+});
+
+// Handle timer form submission
+app.post('/studylog/timer', checkAuthenticated, (req, res) => {
+  const { study_date, topic, duration, notes, mood } = req.body;
+  const sql = 'INSERT INTO study_logs (user_id, study_date, topic, duration, notes, mood) VALUES (?, ?, ?, ?, ?, ?)';
+  connection.query(sql, [req.session.user.id, study_date, topic, duration, notes, mood], (err) => {
+    if (err) throw err;
+    req.flash('success', 'Study session logged successfully!');
+    res.redirect('/studylog');
+  });
 });
 
 // ========================= SERVER =========================
