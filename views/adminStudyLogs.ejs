@@ -17,13 +17,17 @@
       </div>
     </div>
   </nav>
-  <div class="d-flex justify-content-between align-items-center my-3">
-  <form class="d-flex" method="GET" action="/admin/studylogs">
-    <input class="form-control me-2" type="search" name="keyword" placeholder="Search by Topic..." value="<%= keyword || '' %>">
-    <button class="btn btn-primary me-2" type="submit">Filter</button>
-  </form>
+  <form class="d-flex mb-3" method="GET" action="/admin/studylogs">
+  <input
+    type="text"
+    class="form-control me-2"
+    name="keyword"
+    placeholder="Search by topic"
+    value="<%= keyword %>"
+  />
+  <button type="submit" class="btn btn-primary me-2">Filter</button>
   <a href="/admin/studylogs" class="btn btn-secondary">Clear Filter</a>
-  </div>
+  </form>
   <div class="container mt-5">
     <h2>All Users' Study Logs</h2>
     <table class="table table-bordered table-striped mt-4">
