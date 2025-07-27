@@ -200,9 +200,9 @@ app.get('/studylog/delete/:id', checkAuthenticated, (req, res) => {
 });
 
 // ========================= ADMIN =========================
-
 app.get('/admin/studylogs', checkAuthenticated, checkAdmin, (req, res) => {
-    const sql = `
+    const keyword = req.query.keyword;
+    let sql = `
         SELECT 
             study_logs.id AS log_id,
             users.username,
@@ -214,11 +214,24 @@ app.get('/admin/studylogs', checkAuthenticated, checkAdmin, (req, res) => {
             study_logs.study_date AS created_at
         FROM study_logs
         JOIN users ON study_logs.user_id = users.id
-        ORDER BY study_logs.study_date DESC
     `;
-    connection.query(sql, (err, results) => {
+
+    const params = [];
+
+    if (keyword && keyword.trim() !== '') {
+        sql += ' WHERE study_logs.topic LIKE ?';
+        params.push(`%${keyword}%`);
+    }
+
+    sql += ' ORDER BY study_logs.study_date DESC';
+
+    connection.query(sql, params, (err, results) => {
         if (err) throw err;
-        res.render('adminStudylogs', { logs: results, user: req.session.user });
+        res.render('adminStudylogs', {
+            logs: results,
+            user: req.session.user,
+            keyword: keyword || '' // Send current keyword to EJS for display in input
+        });
     });
 });
 

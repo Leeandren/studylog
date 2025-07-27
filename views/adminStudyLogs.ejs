@@ -17,7 +17,13 @@
       </div>
     </div>
   </nav>
-
+  <div class="d-flex justify-content-between align-items-center my-3">
+  <form class="d-flex" method="GET" action="/admin/studylogs">
+    <input class="form-control me-2" type="search" name="keyword" placeholder="Search by Topic..." value="<%= keyword || '' %>">
+    <button class="btn btn-primary me-2" type="submit">Filter</button>
+  </form>
+  <a href="/admin/studylogs" class="btn btn-secondary">Clear Filter</a>
+  </div>
   <div class="container mt-5">
     <h2>All Users' Study Logs</h2>
     <table class="table table-bordered table-striped mt-4">
