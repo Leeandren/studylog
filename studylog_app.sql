@@ -1,6 +1,6 @@
 -- Create the database
-CREATE DATABASE IF NOT EXISTS studylogTeam9_bowopenoff;
-USE studylogTeam9_bowopenoff;
+CREATE DATABASE IF NOT EXISTS studylog_rulersolve;
+USE studylog_rulersolve;
 
 -- Create the users table
 CREATE TABLE users (
