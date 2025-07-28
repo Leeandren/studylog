@@ -281,7 +281,7 @@ app.get('/admin/studylogs', checkAuthenticated, checkAdmin, (req, res) => {
 
     connection.query(sql, params, (err, results) => {
         if (err) throw err;
-        res.render('adminStudylogs', {
+        res.render('adminStudyLogs', {
             logs: results,
             user: req.session.user,
             keyword: keyword || '' 
