@@ -29,7 +29,9 @@
     value="<%= keyword %>"
   />
   <button type="submit" class="btn btn-primary me-2">Filter</button>
-  <a href="/admin/studylogs" class="btn btn-secondary">Clear Filter</a>
+    <% if (keyword) { %>
+      <a href="/admin/studylogs" class="btn btn-secondary">Clear Filter</a>
+    <% } %>
   </form>
   <div class="container mt-5">
     <h2>
