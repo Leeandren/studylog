@@ -4,6 +4,9 @@
   <meta charset="UTF-8">
   <title>Study Timer</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link href="/style.css" rel="stylesheet">
   <style>
     body { text-align: center; padding: 50px; }
     #sessionForm { display: none; }
@@ -30,12 +33,15 @@
       <textarea name="notes" class="form-control" required></textarea>
     </div>
     <div class="form-group">
-      <label>Mood:</label>
+      <label>How did you feel during this session?</label>
       <select name="mood" class="form-control" required>
-        <option value="Happy">Happy</option>
-        <option value="Focused">Focused</option>
-        <option value="Tired">Tired</option>
-        <option value="Distracted">Distracted</option>
+        <option value="">Select your mood...</option>
+        <option value="Happy">😊 Happy - Enjoyed the session</option>
+        <option value="Focused">🎯 Focused - In the zone</option>
+        <option value="Neutral">😐 Neutral - Just okay</option>
+        <option value="Tired">😴 Tired - Low energy</option>
+        <option value="Stressed">😰 Stressed - Felt overwhelmed</option>
+        <option value="Distracted">🤯 Distracted - Hard to concentrate</option>
       </select>
     </div>
     <button type="submit" class="btn btn-primary mt-3">Submit Session</button>
@@ -66,7 +72,7 @@
       clearInterval(timerInterval);
       const totalMins = Math.floor((Date.now() - startTime) / 60000);
       durationInput.value = totalMins;
-      timerDisplay.textContent += ` — Duration: ${totalMins} minutes`;
+      timerDisplay.textContent += ` -- Duration: ${totalMins} minutes`;
       endBtn.disabled = true;
       sessionForm.style.display = 'block';
     });

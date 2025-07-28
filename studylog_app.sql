@@ -1,6 +1,6 @@
 -- Create the database
-CREATE DATABASE IF NOT EXISTS studylog_rocketgas;
-USE studylog_rocketgas;
+CREATE DATABASE IF NOT EXISTS studylog_requirewin;
+USE studylog_requirewin;
 
 -- Create the users table
 CREATE TABLE users (

@@ -6,11 +6,11 @@ const app = express();
 
 // MySQL connection
 const connection = mysql.createConnection({
-  host: 'j9oufe.h.filess.io',
-  port: 61002,
-  user: 'studylog_rocketgas',
-  password: '808f96c52f25bfdf0d58d198072b5c544067d5d4',
-  database: 'studylog_rocketgas'  
+  host: '440co6.h.filess.io',
+  port: '3307',
+  user: 'studylog_requirewin',
+  password: '8215c77b37f9ee46883239a81ba83a26afc642f8',
+  database: 'studylog_requirewin'  
 });
 
 connection.connect((err) => {
@@ -113,12 +113,11 @@ app.get('/logout', (req, res) => {
 });
 
 // ========================= STUDY LOG =========================
-
 app.get('/studylog', checkAuthenticated, (req, res) => {
     const userId = req.session.user.id;
     const keyword = req.query.keyword;
 
-// ===== MERGED: Search/filter functionality =========
+    // ===== MERGED: Search/filter functionality =========
     let sql = 'SELECT * FROM study_logs WHERE user_id = ?';
     const params = [userId];
 
@@ -135,12 +134,66 @@ app.get('/studylog', checkAuthenticated, (req, res) => {
             return res.send('Database error');
         }
 
+        // ========== CALCULATE STATISTICS ==========
+        const totalSessions = results.length;
+        const totalMinutes = results.reduce((sum, log) => sum + log.duration, 0);
+        const totalHours = Math.round(totalMinutes / 60 * 10) / 10;
+        const averageSession = totalSessions > 0 ? Math.round(totalMinutes / totalSessions) : 0;
+        
+        // This week's study time
+        const oneWeekAgo = new Date();
+        oneWeekAgo.setDate(oneWeekAgo.getDate() - 7);
+        const thisWeekLogs = results.filter(log => new Date(log.study_date) >= oneWeekAgo);
+        const thisWeekMinutes = thisWeekLogs.reduce((sum, log) => sum + log.duration, 0);
+        const thisWeekHours = Math.round(thisWeekMinutes / 60 * 10) / 10;
+
+        // ========== CALCULATE STUDY STREAK ==========
+        let streak = 0;
+        if (results.length > 0) {
+            // Get unique study dates, sorted by most recent
+            const uniqueDates = [...new Set(results.map(log => 
+                log.study_date.toISOString().split('T')[0]
+            ))].sort((a, b) => new Date(b) - new Date(a));
+
+            const today = new Date();
+            const todayString = today.toISOString().split('T')[0];
+            
+            // Check if studied today or yesterday to start streak
+            const mostRecentDate = uniqueDates[0];
+            const daysDiff = Math.floor((today - new Date(mostRecentDate)) / (1000 * 60 * 60 * 24));
+            
+            if (daysDiff <= 1) { // If studied today or yesterday
+                streak = 1;
+                
+                // Count consecutive days
+                for (let i = 1; i < uniqueDates.length; i++) {
+                    const currentDate = new Date(uniqueDates[i-1]);
+                    const nextDate = new Date(uniqueDates[i]);
+                    const diff = Math.floor((currentDate - nextDate) / (1000 * 60 * 60 * 24));
+                    
+                    if (diff === 1) {
+                        streak++;
+                    } else {
+                        break;
+                    }
+                }
+            }
+        }
+
         res.render('studylog', {
             logs: results,
             user: req.session.user,
             keyword: keyword || '',
             messages: req.flash('success'),
-            errors: req.flash('error')
+            errors: req.flash('error'),
+            // ========== ADD STATISTICS DATA ==========
+            statistics: {
+                totalSessions: totalSessions,
+                totalHours: totalHours,
+                averageSession: averageSession,
+                thisWeekHours: thisWeekHours
+            },
+            streak: streak
         });
     });
 });
@@ -206,6 +259,7 @@ app.get('/admin/studylogs', checkAuthenticated, checkAdmin, (req, res) => {
         SELECT 
             study_logs.id AS log_id,
             users.username,
+            users.email,
             study_logs.study_date,
             study_logs.topic,
             study_logs.duration,
@@ -230,8 +284,17 @@ app.get('/admin/studylogs', checkAuthenticated, checkAdmin, (req, res) => {
         res.render('adminStudylogs', {
             logs: results,
             user: req.session.user,
-            keyword: keyword || '' // Send current keyword to EJS for display in input
+            keyword: keyword || '' 
         });
+    });
+});
+
+app.get('/admin/studylogs/delete/:id', checkAuthenticated, checkAdmin, (req, res) => {
+    const sql = 'DELETE FROM study_logs WHERE id = ?';
+    connection.query(sql, [req.params.id], (err) => {
+        if (err) throw err;
+        req.flash('success', 'Study log deleted successfully!');
+        res.redirect('/admin/studylogs');
     });
 });
 
@@ -255,4 +318,3 @@ app.post('/studylog/timer', checkAuthenticated, (req, res) => {
 
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => console.log(`Study Log app running on http://localhost:${PORT}`));
-

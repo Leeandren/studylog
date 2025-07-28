@@ -1,31 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Study Log App</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Welcome - StudyLog</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+  <link href="/style.css" rel="stylesheet">
 </head>
 <body>
   <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
     <div class="container-fluid">
-      <a class="navbar-brand" href="/">Study Log App</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarCollapse">
+      <a class="navbar-brand" href="/">StudyLog</a>
+      <div class="collapse navbar-collapse">
         <ul class="navbar-nav ms-auto">
-          <% if (!user) { %>
+          <% if (user) { %>
             <li class="nav-item">
-              <a class="nav-link" href="/register">Register</a>
+              <a class="nav-link" href="/studylog">Dashboard</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="/login">Login</a>
+              <a class="nav-link" href="/logout">Logout</a>
             </li>
           <% } else { %>
             <li class="nav-item">
-              <a class="nav-link" href="/logout">Logout</a>
+              <a class="nav-link" href="/login">Login</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/register">Register</a>
             </li>
           <% } %>
         </ul>
@@ -33,17 +35,19 @@
     </div>
   </nav>
 
-  <div class="container mt-5 text-center">
-    <% if (user) { %>
-      <h2>Welcome, <%= user.username %>!</h2>
-      <% if (user.role === 'admin') { %>
-        <p>View all study logs in the <a href="/admin/studylogs">Admin Dashboard</a></p>
-      <% } else { %>
-        <p>Go to your <a href="/studylog">Study Log</a> to track your sessions.</p>
-      <% } %>
+  <div class="container text-center hero">
+    <h1 class="display-5 fw-bold">Welcome to StudyLog</h1>
+    <p class="lead mt-3">Track your study sessions, reflect on your progress, and build better learning habits.</p>
+
+    <% if (!user) { %>
+      <div class="mt-4">
+        <a href="/register" class="btn btn-primary btn-lg me-2">Get Started</a>
+        <a href="/login" class="btn btn-outline-primary btn-lg">Login</a>
+      </div>
     <% } else { %>
-      <h2>Welcome to the Study Log App!</h2>
-      <p>Please <a href="/login">login</a> or <a href="/register">register</a> to start logging your study habits.</p>
+      <div class="mt-4">
+        <a href="/studylog" class="btn btn-primary btn-lg">Go to My Logs</a>
+      </div>
     <% } %>
   </div>
 </body>

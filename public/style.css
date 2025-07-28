@@ -1,0 +1,237 @@
+/* ===== ENHANCED BOOTSTRAP STYLING ===== */
+/* This works WITH Bootstrap, not against it */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Playfair+Display:wght@400;600&display=swap');
+
+/* Override Bootstrap variables */
+:root {
+  --cozy-primary: #8b7355;
+  --cozy-secondary: #6b5a44;
+  --cozy-accent: #c69963;
+  --cozy-light: #faf7f0;
+  --cozy-bg: linear-gradient(135deg, #faf7f0 0%, #f5f1e8 100%);
+}
+
+/* Base body styling */
+body {
+  font-family: 'Inter', sans-serif !important;
+  background: var(--cozy-bg) !important;
+  color: #4a4a4a !important;
+  line-height: 1.6 !important;
+}
+
+/* ===== ENHANCE BOOTSTRAP NAVBAR ===== */
+.navbar.bg-dark {
+  background: rgba(139, 115, 85, 0.95) !important;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand {
+  font-family: 'Playfair Display', serif !important;
+  font-weight: 600 !important;
+  color: white !important;
+}
+
+.nav-link {
+  color: rgba(255, 255, 255, 0.9) !important;
+  border-radius: 20px !important;
+  transition: all 0.3s ease !important;
+  margin: 0 0.25rem !important;
+}
+
+.nav-link:hover {
+  background: rgba(255, 255, 255, 0.1) !important;
+  color: white !important;
+  transform: translateY(-1px);
+}
+
+/* ===== ENHANCE BOOTSTRAP CARDS ===== */
+.card {
+  background: rgba(255, 255, 255, 0.9) !important;
+  backdrop-filter: blur(10px) !important;
+  border-radius: 20px !important;
+  border: 1px solid rgba(139, 115, 85, 0.1) !important;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.08) !important;
+  transition: all 0.3s ease !important;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 15px 50px rgba(0, 0, 0, 0.12) !important;
+}
+
+.card-header {
+  background: linear-gradient(135deg, var(--cozy-primary) 0%, var(--cozy-secondary) 100%) !important;
+  color: white !important;
+  border-radius: 20px 20px 0 0 !important;
+  border: none !important;
+  font-weight: 600 !important;
+}
+
+/* ===== ENHANCE BOOTSTRAP BUTTONS ===== */
+.btn-primary {
+  background: linear-gradient(135deg, var(--cozy-primary) 0%, var(--cozy-secondary) 100%) !important;
+  border: none !important;
+  border-radius: 25px !important;
+  padding: 0.75rem 2rem !important;
+  font-weight: 500 !important;
+  box-shadow: 0 4px 15px rgba(139, 115, 85, 0.3) !important;
+  transition: all 0.3s ease !important;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, var(--cozy-secondary) 0%, #5a4936 100%) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 20px rgba(139, 115, 85, 0.4) !important;
+}
+
+.btn-success {
+  background: linear-gradient(135deg, #28a745 0%, #218838 100%) !important;
+  border: none !important;
+  border-radius: 25px !important;
+  box-shadow: 0 4px 15px rgba(40, 167, 69, 0.3) !important;
+  transition: all 0.3s ease !important;
+}
+
+.btn-success:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 20px rgba(40, 167, 69, 0.4) !important;
+}
+
+.btn-info {
+  background: linear-gradient(135deg, #17a2b8 0%, #138496 100%) !important;
+  border: none !important;
+  border-radius: 25px !important;
+  box-shadow: 0 4px 15px rgba(23, 162, 184, 0.3) !important;
+  transition: all 0.3s ease !important;
+}
+
+.btn-info:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 20px rgba(23, 162, 184, 0.4) !important;
+}
+
+.btn-warning {
+  background: linear-gradient(135deg, #ffc107 0%, #e0a800 100%) !important;
+  border: none !important;
+  border-radius: 25px !important;
+  color: #212529 !important;
+  font-weight: 600 !important;
+  box-shadow: 0 4px 15px rgba(255, 193, 7, 0.3) !important;
+  transition: all 0.3s ease !important;
+}
+
+.btn-warning:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 20px rgba(255, 193, 7, 0.4) !important;
+  color: #212529 !important;
+}
+
+.btn-danger {
+  background: linear-gradient(135deg, #dc3545 0%, #c82333 100%) !important;
+  border: none !important;
+  border-radius: 25px !important;
+  box-shadow: 0 4px 15px rgba(220, 53, 69, 0.3) !important;
+  transition: all 0.3s ease !important;
+}
+
+.btn-danger:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 20px rgba(220, 53, 69, 0.4) !important;
+}
+
+/* ===== ENHANCE BOOTSTRAP FORMS ===== */
+.form-control {
+  border-radius: 12px !important;
+  border: 2px solid rgba(139, 115, 85, 0.2) !important;
+  padding: 0.75rem 1rem !important;
+  font-family: 'Inter', sans-serif !important;
+  transition: all 0.3s ease !important;
+}
+
+.form-control:focus {
+  border-color: var(--cozy-accent) !important;
+  box-shadow: 0 0 0 3px rgba(196, 153, 99, 0.1) !important;
+  transform: translateY(-1px);
+}
+
+.form-label {
+  font-weight: 500 !important;
+  color: var(--cozy-secondary) !important;
+  margin-bottom: 0.6rem !important;
+}
+
+/* ===== ENHANCE BOOTSTRAP TABLES ===== */
+.table {
+  background: rgba(255, 255, 255, 0.9) !important;
+  border-radius: 15px !important;
+  overflow: hidden !important;
+  box-shadow: 0 5px 25px rgba(0, 0, 0, 0.08) !important;
+}
+
+.table-striped > tbody > tr:nth-of-type(odd) > td {
+  background: rgba(139, 115, 85, 0.03) !important;
+}
+
+.table-hover tbody tr:hover {
+  background: rgba(139, 115, 85, 0.08) !important;
+}
+
+/* ===== ENHANCE BOOTSTRAP ALERTS ===== */
+.alert {
+  border-radius: 15px !important;
+  border: none !important;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1) !important;
+}
+
+.alert-success {
+  background: linear-gradient(135deg, rgba(40, 167, 69, 0.1) 0%, rgba(40, 167, 69, 0.05) 100%) !important;
+  color: #155724 !important;
+}
+
+.alert-danger {
+  background: linear-gradient(135deg, rgba(220, 53, 69, 0.1) 0%, rgba(220, 53, 69, 0.05) 100%) !important;
+  color: #721c24 !important;
+}
+
+/* ===== ENHANCE BOOTSTRAP BADGES ===== */
+.badge {
+  border-radius: 10px !important;
+  padding: 0.5rem 0.8rem !important;
+  font-weight: 500 !important;
+}
+
+/* ===== CUSTOM TYPOGRAPHY ===== */
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Playfair Display', serif !important;
+  color: var(--cozy-primary) !important;
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.container {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+/* ===== RESPONSIVE ENHANCEMENTS ===== */
+@media (max-width: 768px) {
+  .card {
+    margin: 0 1rem !important;
+  }
+  
+  .btn {
+    width: 100% !important;
+    margin-bottom: 0.5rem !important;
+  }
+}
