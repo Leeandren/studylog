@@ -1,6 +1,6 @@
 -- Create the database
-CREATE DATABASE IF NOT EXISTS studylog_requirewin;
-USE studylog_requirewin;
+CREATE DATABASE IF NOT EXISTS studylogTeam9_bowopenoff;
+USE studylogTeam9_bowopenoff;
 
 -- Create the users table
 CREATE TABLE users (
